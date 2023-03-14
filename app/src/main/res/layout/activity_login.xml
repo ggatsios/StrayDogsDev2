@@ -11,21 +11,24 @@
         android:id="@+id/etEmail"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="672dp"
         android:hint="Email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="6dp"
-        tools:layout_editor_absoluteY="-3dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="6dp" />
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="347dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="4dp"
+        android:layout_marginBottom="611dp"
         android:hint="Password"
         android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="59dp"
         tools:ignore="MissingConstraints" />
 
     <Button

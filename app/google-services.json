@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "617776628058",
+    "project_id": "straydogsdev2",
+    "storage_bucket": "straydogsdev2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617776628058:android:35f6d31571b4f2f33cf363",
+        "android_client_info": {
+          "package_name": "com.example.straydogsdev"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617776628058-mgml67asvv9obtop1plne7elhrbak2p4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2s1OGJDylY22bgXV7N8TSDX6cbhGYwf0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617776628058-mgml67asvv9obtop1plne7elhrbak2p4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
