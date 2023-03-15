@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Report a Stray Dog"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="@+id/editTextDogLocation"
+        android:layotu_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add dog's location"
+        android:padding="16dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter dog name (optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogColor"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter dog color (optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogBreed"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter dog breed (optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter dog gender (optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
+
+    <Button
+        android:id="@+id/buttonReportDog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:textSize="16sp"
+        android:padding="16dp" />
+
+</LinearLayout>
