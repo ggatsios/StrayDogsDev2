@@ -23,8 +23,8 @@
         android:inputType="text" />
 
     <EditText
-        android:layout_width="@+id/editTextDogLocation"
-        android:layotu_width="match_parent"
+        android:id="@+id/editTextDogLocation"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Add dog's location"
         android:padding="16dp"
