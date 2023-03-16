@@ -1,5 +1,6 @@
 package com.example.straydogsdev;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,8 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
-
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText mUserName;
@@ -27,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText mPassword;
     private EditText mConfirmPassword;
     private Button mRegisterButton;
-
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
 
@@ -72,6 +70,9 @@ public class RegisterActivity extends AppCompatActivity {
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
                                                         Toast.makeText(RegisterActivity.this, "Registration Successful", Toast.LENGTH_LONG).show();
+                                                        Intent intent = new Intent(RegisterActivity.this, MainMenuActivity.class);
+                                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                                        startActivity(intent);
                                                     }
                                                 }
                                             });
@@ -91,5 +92,3 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 }
-
-//

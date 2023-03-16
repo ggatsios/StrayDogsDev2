@@ -35,6 +35,13 @@
 
         </activity>
 
+        <!-- Main Menu Activity -->
+        <activity
+            android:name=".MainMenuActivity"
+            android:label="Main Menu">
+
+        </activity>
+
     </application>
 
 </manifest>
