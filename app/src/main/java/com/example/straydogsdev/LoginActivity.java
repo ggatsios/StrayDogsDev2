@@ -1,5 +1,6 @@
 package com.example.straydogsdev;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -47,6 +48,11 @@ public class LoginActivity extends AppCompatActivity {
                                     if (task.isSuccessful()) {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(LoginActivity.this, "Authentication successful.", Toast.LENGTH_SHORT).show();
+
+                                        // Create Intent to go to MainMenuActivity
+                                        Intent intent = new Intent(LoginActivity.this, MainMenuActivity.class);
+                                        startActivity(intent);
+                                        finish(); // Close LoginActivity
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         Toast.makeText(LoginActivity.this, "Authentication failed.",
