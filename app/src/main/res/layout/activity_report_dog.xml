@@ -13,19 +13,20 @@
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editTextDogLocation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Add dog's location"
-        android:padding="16dp"
-        android:inputType="text" />
 
     <EditText
         android:id="@+id/editTextDogName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter dog name (optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Add dog's location"
         android:padding="16dp"
         android:inputType="text" />
 
@@ -52,6 +53,15 @@
         android:hint="Enter dog gender (optional)"
         android:padding="16dp"
         android:inputType="text" />
+
+    <EditText
+        android:id="@+id/editTextDogDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Tell us a few words about it (Optional)"
+        android:padding="16dp"
+        android:inputType="text" />
+
 
 
     <Button

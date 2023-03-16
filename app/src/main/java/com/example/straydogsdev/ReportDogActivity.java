@@ -18,9 +18,9 @@ public class ReportDogActivity extends AppCompatActivity {
     private EditText editTextDogLocation;
     private EditText editTextDogColor;
     private EditText editTextDogBreed;
-
     private EditText editTextDogGender;
 
+    private EditText editTextDogDescription;
     private Button buttonReportDog;
 
     @Override
@@ -29,18 +29,21 @@ public class ReportDogActivity extends AppCompatActivity {
         setContentView(R.layout.activity_report_dog);
 
         editTextDogName = findViewById(R.id.editTextDogName);
-        editTextDogLocation = findViewById(R.id.editTextDogLocation);
+        editTextDogLocation = findViewById(R.id.editTextDogLocation); // Fix error, probably needs to be called differently
         editTextDogColor = findViewById(R.id.editTextDogColor);
         editTextDogBreed = findViewById(R.id.editTextDogBreed);
         editTextDogGender = findViewById(R.id.editTextDogGender);
+        editTextDogDescription = findViewById(R.id.editTextDogDescription);
         buttonReportDog = findViewById(R.id.buttonReportDog);
 
         buttonReportDog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String name = editTextDogName.getText().toString().trim();
-                String breed = editTextDogBreed.getText().toString().trim();
                 String color = editTextDogColor.getText().toString().trim();
+                String breed = editTextDogBreed.getText().toString().trim();
+                String gender = editTextDogGender.getText().toString().trim();
+                String description = editTextDogDescription.getText().toString().trim();
                 String location = editTextDogLocation.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name)) {
@@ -69,7 +72,7 @@ public class ReportDogActivity extends AppCompatActivity {
 
                 DatabaseReference databaseDogs = FirebaseDatabase.getInstance().getReference("dogs");
                 String id = databaseDogs.push().getKey();
-                StrayDogData dog = new StrayDogData(id, location, name, color, breed, gender, imageURL, description);
+                StrayDogData dog = new StrayDogData(id, location, name, color, breed, gender, description);
                 databaseDogs.child(id).setValue(dog);
 
                 Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
