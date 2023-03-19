@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private Button btnLogin;
-
+    private Button btnReturn;
     private FirebaseAuth mAuth;
 
     @Override
@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         etEmail = findViewById(R.id.etEmail);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
+        btnReturn = findViewById(R.id.btnReturn);
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -63,6 +64,13 @@ public class LoginActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(LoginActivity.this, "Please enter email and password", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
