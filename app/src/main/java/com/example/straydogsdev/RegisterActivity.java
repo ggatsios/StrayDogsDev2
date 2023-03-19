@@ -28,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button mRegisterButton;
     private FirebaseAuth mAuth;
     private DatabaseReference mDatabase;
+    private Button btnReturn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,7 @@ public class RegisterActivity extends AppCompatActivity {
         mPassword = findViewById(R.id.etPassword);
         mConfirmPassword = findViewById(R.id.etRePassword);
         mRegisterButton = findViewById(R.id.btnRegister);
+        btnReturn = findViewById(R.id.btnReturn);
 
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +90,13 @@ public class RegisterActivity extends AppCompatActivity {
                 } else {
                     Toast.makeText(RegisterActivity.this, "Fields cannot be empty", Toast.LENGTH_LONG).show();
                 }
+            }
+        });
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }
