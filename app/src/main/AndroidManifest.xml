@@ -42,6 +42,14 @@
 
         </activity>
 
+        <!-- report Dog Activity -->
+        <activity
+            android:name=".ReportDogActivity"
+            android:label="Report a Dog">
+
+        </activity>
+
+
     </application>
 
 </manifest>

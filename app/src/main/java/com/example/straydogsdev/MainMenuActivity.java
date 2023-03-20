@@ -33,13 +33,13 @@ public class MainMenuActivity extends AppCompatActivity {
         txtWelcome.setText(welcomeMessage);
 
         // Set the click listeners for the buttons
-//        btnReportDog.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent = new Intent(MainMenuActivity.this, ReportDogActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        btnReportDog.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainMenuActivity.this, ReportDogActivity.class);
+                startActivity(intent);
+            }
+        });
 
         btnViewDogs.setOnClickListener(new View.OnClickListener() {
             @Override

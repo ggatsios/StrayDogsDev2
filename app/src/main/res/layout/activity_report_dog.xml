@@ -18,7 +18,7 @@
         android:id="@+id/editTextDogName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter dog name (optional)"
+        android:hint="Enter dog name "
         android:padding="16dp"
         android:inputType="text" />
 

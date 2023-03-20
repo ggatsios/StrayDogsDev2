@@ -40,27 +40,15 @@ public class ReportDogActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String name = editTextDogName.getText().toString().trim();
+                String location = editTextDogLocation.getText().toString().trim();
                 String color = editTextDogColor.getText().toString().trim();
                 String breed = editTextDogBreed.getText().toString().trim();
                 String gender = editTextDogGender.getText().toString().trim();
                 String description = editTextDogDescription.getText().toString().trim();
-                String location = editTextDogLocation.getText().toString().trim();
 
                 if (TextUtils.isEmpty(name)) {
                     editTextDogName.setError("Please enter the dog's name");
                     editTextDogName.requestFocus();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(breed)) {
-                    editTextDogBreed.setError("Please enter the dog's breed");
-                    editTextDogBreed.requestFocus();
-                    return;
-                }
-
-                if (TextUtils.isEmpty(color)) {
-                    editTextDogColor.setError("Please enter the dog's color");
-                    editTextDogColor.requestFocus();
                     return;
                 }
 
@@ -70,9 +58,25 @@ public class ReportDogActivity extends AppCompatActivity {
                     return;
                 }
 
+                if (TextUtils.isEmpty(color)) {
+                    editTextDogColor.setError("Please enter the dog's color");
+                    editTextDogColor.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(breed)) {
+                    editTextDogBreed.setError("Please enter the dog's breed");
+                    editTextDogBreed.requestFocus();
+                    return;
+                }
+
+
+
+
+
                 DatabaseReference databaseDogs = FirebaseDatabase.getInstance().getReference("dogs");
                 String id = databaseDogs.push().getKey();
-                StrayDogData dog = new StrayDogData(id, location, name, color, breed, gender, description);
+                StrayDogData dog = new StrayDogData(id, name, location, color, breed, gender, description);
                 databaseDogs.child(id).setValue(dog);
 
                 Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
