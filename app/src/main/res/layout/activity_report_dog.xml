@@ -62,6 +62,12 @@
         android:padding="16dp"
         android:inputType="text" />
 
+    <Button
+        android:id="@+id/btnPhoto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Upload Photo"/>
+
 
 
     <Button
