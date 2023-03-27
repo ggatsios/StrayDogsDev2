@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Button btnReportDog, btnViewDogs, btnViewMap, btnLogout;
+    private Button btnReportDog, btnViewMap, btnLogout;
     private TextView txtWelcome;
 
     @Override
@@ -24,7 +24,6 @@ public class MainMenuActivity extends AppCompatActivity {
         // Initialize the UI components
         txtWelcome = findViewById(R.id.txtWelcome);
         btnReportDog = findViewById(R.id.btnReportDog);
-        btnViewDogs = findViewById(R.id.btnViewDogs);
         btnViewMap = findViewById(R.id.btnViewMap);
         btnLogout = findViewById(R.id.btnLogout);
 
@@ -41,13 +40,6 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
 
-        btnViewDogs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainMenuActivity.this, StrayDogData.class);
-                startActivity(intent);
-            }
-        });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override

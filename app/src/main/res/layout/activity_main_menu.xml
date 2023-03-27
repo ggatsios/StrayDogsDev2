@@ -34,7 +34,7 @@
         android:id="@+id/btnViewDogs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Stray Dog Data"
+        android:text="View Dogs"
         android:layout_below="@id/btnViewMap"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"/>
