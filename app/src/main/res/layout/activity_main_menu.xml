@@ -30,21 +30,13 @@
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"/>
 
-    <Button
-        android:id="@+id/btnViewDogs"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="View Dogs"
-        android:layout_below="@id/btnViewMap"
-        android:layout_marginTop="32dp"
-        android:layout_centerHorizontal="true"/>
 
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_below="@id/btnViewDogs"
+        android:layout_below="@id/btnViewMap"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"/>
 
