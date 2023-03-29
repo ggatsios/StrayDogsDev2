@@ -9,8 +9,11 @@ public class StrayDogData {
     private String gender;
     private String description;
     private String photoUrl;
+    private double latitude;
+    private double longitude;
 
-    public StrayDogData(String id, String name, String location, String color, String breed, String gender, String description, String photoUrl) {
+
+    public StrayDogData(String id, String name, String location, String color, String breed, String gender, String description, String photoUrl, double latitude, double longitude) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -19,6 +22,8 @@ public class StrayDogData {
         this.gender = gender;
         this.description = description;
         this.photoUrl = photoUrl;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 
     public String getId() {
@@ -52,6 +57,13 @@ public class StrayDogData {
     public String getPhotoUrl() {
         return photoUrl;
     }
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -84,6 +96,13 @@ public class StrayDogData {
     public void setPhotoUrl(String photoUrl) {
         this.photoUrl = photoUrl;
     }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+
 
     @Override
     public String toString() {
