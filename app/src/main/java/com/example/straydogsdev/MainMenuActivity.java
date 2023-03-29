@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.android.libraries.places.api.Places;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -18,6 +20,10 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
+        String apiKey = "AIzaSyCWMYdlULQUXLukj5ubeIBFXurTzQtY_Oo";
+        if(!Places.isInitialized()){
+            Places.initialize(getApplicationContext(), apiKey);
+        }
         // Get the user's name from the intent
         String username = getIntent().getStringExtra("USERNAME");
 
