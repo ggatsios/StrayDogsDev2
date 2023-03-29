@@ -16,11 +16,11 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.api.Status;
-import com.google.android.gms.location.places.Place;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.api.model.Place;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -33,10 +33,14 @@ import com.google.android.libraries.places.api.model.Place.Field;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+
 
 
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 public class ReportDogActivity extends AppCompatActivity {
@@ -52,8 +56,10 @@ public class ReportDogActivity extends AppCompatActivity {
 
     private Uri selectedImageUri;
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
-    private double latitude;
-    private double longitude;
+    private LatLng locationLatLng;
+
+    private ActivityResultLauncher<Intent> placeResultLauncher;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +76,17 @@ public class ReportDogActivity extends AppCompatActivity {
         buttonUploadPhoto = findViewById(R.id.btnPhoto);
 
         editTextDogLocation.setInputType(InputType.TYPE_NULL);
+
+        placeResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(result.getData());
+                editTextDogLocation.setText(place.getAddress());
+                locationLatLng = place.getLatLng();
+            } else if (result.getResultCode() == AutocompleteActivity.RESULT_ERROR) {
+                Status status = Autocomplete.getStatusFromIntent(result.getData());
+                Toast.makeText(ReportDogActivity.this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
         editTextDogLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -153,9 +170,9 @@ public class ReportDogActivity extends AppCompatActivity {
     private void openAutocompleteActivity() {
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
 
-        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, Collections.singletonList(fields))
-                .build(this);
-        startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+        Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.OVERLAY, fields)
+                .build(ReportDogActivity.this);
+        placeResultLauncher.launch(intent);
     }
 
     @Override
@@ -170,15 +187,12 @@ public class ReportDogActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Place place = (Place) Autocomplete.getPlaceFromIntent(data);
                 editTextDogLocation.setText(place.getAddress());
-                LatLng latLng = place.getLatLng();
-                if (latLng != null) {
-                    latitude = latLng.latitude;
-                    longitude = latLng.longitude;
-                }
+                locationLatLng = place.getLatLng();
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Toast.makeText(this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
+
 }
