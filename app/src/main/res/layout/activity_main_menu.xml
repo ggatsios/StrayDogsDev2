@@ -22,10 +22,10 @@
         android:layout_centerHorizontal="true"/>
 
     <Button
-        android:id="@+id/btnViewMap"
+        android:id="@+id/btnFindDogs"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Stray Dogs on Map"
+        android:text="Find Dogs"
         android:layout_below="@id/btnReportDog"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"/>
@@ -36,7 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Logout"
-        android:layout_below="@id/btnViewMap"
+        android:layout_below="@id/btnFindDogs"
         android:layout_marginTop="32dp"
         android:layout_centerHorizontal="true"/>
 
