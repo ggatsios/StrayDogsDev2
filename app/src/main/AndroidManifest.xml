@@ -53,6 +53,13 @@
 
         </activity>
 
+        <!-- Search Dog Activity -->
+        <activity
+            android:name=".SearchDogActivity"
+            android:label="Find Dogs">
+
+        </activity>
+
 
     </application>
 

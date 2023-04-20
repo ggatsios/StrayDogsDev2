@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainMenuActivity extends AppCompatActivity {
 
-    private Button btnReportDog, btnViewMap, btnLogout;
+    private Button btnReportDog, btnFindDogs, btnLogout;
     private TextView txtWelcome;
 
     @Override
@@ -30,7 +30,7 @@ public class MainMenuActivity extends AppCompatActivity {
         // Initialize the UI components
         txtWelcome = findViewById(R.id.txtWelcome);
         btnReportDog = findViewById(R.id.btnReportDog);
-        btnViewMap = findViewById(R.id.btnViewMap);
+        btnFindDogs = findViewById(R.id.btnFindDogs);
         btnLogout = findViewById(R.id.btnLogout);
 
         // Set the welcome message with the user's name
@@ -42,6 +42,14 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainMenuActivity.this, ReportDogActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnFindDogs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainMenuActivity.this, SearchDogActivity.class);
                 startActivity(intent);
             }
         });

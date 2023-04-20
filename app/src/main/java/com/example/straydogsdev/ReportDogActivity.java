@@ -28,18 +28,13 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import com.google.android.libraries.places.api.model.Place.Field;
-//import com.google.android.libraries.places.api.model.TypeFilter;
-//import com.google.android.libraries.places.api.net.PlacesClient;
 import com.google.android.libraries.places.widget.Autocomplete;
 import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 
-
-
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -57,9 +52,9 @@ public class ReportDogActivity extends AppCompatActivity {
     private Uri selectedImageUri;
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
     private LatLng locationLatLng;
-
     private ActivityResultLauncher<Intent> placeResultLauncher;
-
+    double latitude;
+    double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +77,16 @@ public class ReportDogActivity extends AppCompatActivity {
                 Place place = Autocomplete.getPlaceFromIntent(result.getData());
                 editTextDogLocation.setText(place.getAddress());
                 locationLatLng = place.getLatLng();
+                if (locationLatLng != null) {
+                    latitude = locationLatLng.latitude;
+                    longitude = locationLatLng.longitude;
+                }
             } else if (result.getResultCode() == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(result.getData());
                 Toast.makeText(ReportDogActivity.this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
         editTextDogLocation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,12 +146,15 @@ public class ReportDogActivity extends AppCompatActivity {
                             // Save the photo's download URL to the database
                             DatabaseReference databaseDogs = FirebaseDatabase.getInstance().getReference("dogs");
                             String id = databaseDogs.push().getKey();
-                            StrayDogData dog = new StrayDogData(id, name, location, color, breed, gender, description, downloadUri.toString());
-                            databaseDogs.child(id).setValue(dog);
-                            Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
-                            finish();
-                        } else {
-                            // Handle failures
+                            if (id != null) {
+                                StrayDogData dog = new StrayDogData(id, name, location, color, breed, gender, description, downloadUri.toString(), latitude, longitude);
+                                databaseDogs.child(id).setValue(dog);
+                                Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
+                                finish();
+                            } else {
+                                // Handle failures
+                                Toast.makeText(ReportDogActivity.this, "Error generating dog ID, please try again", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 });
@@ -188,11 +191,16 @@ public class ReportDogActivity extends AppCompatActivity {
                 Place place = (Place) Autocomplete.getPlaceFromIntent(data);
                 editTextDogLocation.setText(place.getAddress());
                 locationLatLng = place.getLatLng();
+                if (locationLatLng != null) {
+                    latitude = locationLatLng.latitude;
+                    longitude = locationLatLng.longitude;
+                }
             } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
                 Status status = Autocomplete.getStatusFromIntent(data);
-                Toast.makeText(this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(ReportDogActivity.this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
-
 }
+
+
