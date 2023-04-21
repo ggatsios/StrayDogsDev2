@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -44,7 +45,7 @@ public class ReportDogActivity extends AppCompatActivity {
     private EditText editTextDogLocation;
     private EditText editTextDogColor;
     private EditText editTextDogBreed;
-    private EditText editTextDogGender;
+    private String selectedGender;
     private EditText editTextDogDescription;
     private Button buttonReportDog;
     private Button buttonUploadPhoto;
@@ -65,12 +66,27 @@ public class ReportDogActivity extends AppCompatActivity {
         editTextDogLocation = findViewById(R.id.editTextDogLocation);
         editTextDogColor = findViewById(R.id.editTextDogColor);
         editTextDogBreed = findViewById(R.id.editTextDogBreed);
-        editTextDogGender = findViewById(R.id.editTextDogGender);
+        RadioGroup genderRadioGroup = findViewById(R.id.gender_radio_group);
         editTextDogDescription = findViewById(R.id.editTextDogDescription);
         buttonReportDog = findViewById(R.id.buttonReportDog);
         buttonUploadPhoto = findViewById(R.id.btnPhoto);
 
         editTextDogLocation.setInputType(InputType.TYPE_NULL);
+
+        genderRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.male_radio_button) {
+                    selectedGender = "Male";
+                } else if (checkedId == R.id.female_radio_button) {
+                    selectedGender = "Female";
+                } else {
+                    selectedGender = "";
+                }
+                // Use the selectedGender variable for your app's logic
+            }
+        });
+
 
         placeResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), result -> {
             if (result.getResultCode() == RESULT_OK) {
@@ -101,7 +117,6 @@ public class ReportDogActivity extends AppCompatActivity {
                 String location = editTextDogLocation.getText().toString().trim();
                 String color = editTextDogColor.getText().toString().trim();
                 String breed = editTextDogBreed.getText().toString().trim();
-                String gender = editTextDogGender.getText().toString().trim();
                 String description = editTextDogDescription.getText().toString().trim();
                 if (TextUtils.isEmpty(name)) {
                     editTextDogName.setError("Please enter the dog's name");
@@ -147,7 +162,7 @@ public class ReportDogActivity extends AppCompatActivity {
                             DatabaseReference databaseDogs = FirebaseDatabase.getInstance().getReference("dogs");
                             String id = databaseDogs.push().getKey();
                             if (id != null) {
-                                StrayDogData dog = new StrayDogData(id, name, location, color, breed, gender, description, downloadUri.toString(), latitude, longitude);
+                                StrayDogData dog = new StrayDogData(id, name, location, color, breed, selectedGender, description, downloadUri.toString(), latitude, longitude);
                                 databaseDogs.child(id).setValue(dog);
                                 Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
                                 finish();
