@@ -6,9 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.android.libraries.places.api.Places;
-
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.libraries.places.api.Places;
 
 public class MainMenuActivity extends AppCompatActivity {
 
@@ -34,8 +34,8 @@ public class MainMenuActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
 
         // Set the welcome message with the user's name
-        String welcomeMessage = "Welcome, " + username + "!";
-        txtWelcome.setText(welcomeMessage);
+//        String welcomeMessage = "Welcome, " + username + "!";
+//        txtWelcome.setText(welcomeMessage);
 
         // Set the click listeners for the buttons
         btnReportDog.setOnClickListener(new View.OnClickListener() {
