@@ -26,7 +26,7 @@
     android:id="@+id/editTextDogLocation"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:hint="Enter Location"
+    android:hint="   Enter Location"
     android:inputType="text"
     android:maxLines="1" />
 
@@ -34,7 +34,7 @@
         android:id="@+id/editTextDogColor"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter dog color (optional)"
+        android:hint="Enter dog color"
         android:padding="16dp"
         android:inputType="text" />
 
@@ -46,13 +46,26 @@
         android:padding="16dp"
         android:inputType="text" />
 
-    <EditText
-        android:id="@+id/editTextDogGender"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:id="@+id/gender_radio_group"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter dog gender (optional)"
-        android:padding="16dp"
-        android:inputType="text" />
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/male_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male" />
+
+        <RadioButton
+            android:id="@+id/female_radio_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female" />
+
+    </RadioGroup>
+
 
     <EditText
         android:id="@+id/editTextDogDescription"

@@ -8,6 +8,7 @@ android {
     namespace 'com.example.straydogsdev'
     compileSdk 33
 
+
     defaultConfig {
         applicationId "com.example.straydogsdev"
         minSdk 21

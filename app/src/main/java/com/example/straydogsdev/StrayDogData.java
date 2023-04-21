@@ -13,13 +13,13 @@ public class StrayDogData {
     private double longitude;
 
 
-    public StrayDogData(String id, String name, String location, String color, String breed, String gender, String description, String photoUrl, double latitude, double longitude) {
+    public StrayDogData(String id, String name, String location, String color, String breed, String selectedGender, String description, String photoUrl, double latitude, double longitude) {
         this.id = id;
         this.name = name;
         this.location = location;
         this.color = color;
         this.breed = breed;
-        this.gender = gender;
+        this.gender = selectedGender;
         this.description = description;
         this.photoUrl = photoUrl;
         this.latitude = latitude;
