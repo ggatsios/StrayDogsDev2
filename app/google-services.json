@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "617776628058",
+    "firebase_url": "https://straydogsdev2-default-rtdb.firebaseio.com",
     "project_id": "straydogsdev2",
     "storage_bucket": "straydogsdev2.appspot.com"
   },
