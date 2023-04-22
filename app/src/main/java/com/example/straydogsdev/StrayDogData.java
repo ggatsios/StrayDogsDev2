@@ -8,7 +8,7 @@ public class StrayDogData {
     private String breed;
     private String gender;
     private String description;
-    private String photoUrl;
+    public String photoUrl;
     private double latitude;
     private double longitude;
 

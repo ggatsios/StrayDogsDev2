@@ -71,6 +71,7 @@ public class SearchDogActivity extends AppCompatActivity implements OnMapReadyCa
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setInfoWindowAdapter(new InfoWindowAdapter(SearchDogActivity.this));
 
         databaseDogs.addValueEventListener(new ValueEventListener() {
             @Override
@@ -98,4 +99,5 @@ public class SearchDogActivity extends AppCompatActivity implements OnMapReadyCa
             }
         });
     }
+
 }
