@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import com.google.android.libraries.places.api.Places;
 import com.google.firebase.FirebaseApp;
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(this);
 
+        // Initialize the Places SDK with your API key
+        if (!Places.isInitialized()) {
+            Places.initialize(getApplicationContext(), "AIzaSyDRPxOLxc2QXmjTeBlXx1AWCHigLZdC4Fo");
+        }
 
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)

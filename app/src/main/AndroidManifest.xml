@@ -13,9 +13,11 @@
         android:theme="@style/Theme.StrayDogsDev"
         tools:targetApi="31">
 
+        <!-- Maps API Key -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDloxjXSGB0q_dzLoZ6Pd6LP3PPYBpKyuM" />
+            android:value="AIzaSyDRPxOLxc2QXmjTeBlXx1AWCHigLZdC4Fo" />
+
 
         <!-- MainActivity -->
         <activity
