@@ -26,6 +26,9 @@ public class StrayDogData {
         this.longitude = longitude;
     }
 
+    public StrayDogData() {
+    }
+
     public String getId() {
         return id;
     }
