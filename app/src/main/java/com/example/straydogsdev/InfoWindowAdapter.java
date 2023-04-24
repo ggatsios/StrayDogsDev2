@@ -28,22 +28,31 @@ public class InfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
     @Override
     public View getInfoContents(Marker marker) {
         StrayDogData dog = (StrayDogData) marker.getTag();
-        if (dog == null) {
-            return null;
+
+        View view = LayoutInflater.from(context).inflate(R.layout.info_window, null);
+
+        ImageView dogImageView = view.findViewById(R.id.dogImageView);
+        TextView dogNameTextView = view.findViewById(R.id.dog_name);
+        TextView dogGenderTextView = view.findViewById(R.id.dog_gender);
+        TextView dogDescriptionTextView = view.findViewById(R.id.dog_description);
+
+        if (dog.getPhotoUrl() != null && !dog.getPhotoUrl().isEmpty()) {
+            MarkerImageTarget target = new MarkerImageTarget(marker, dogImageView);
+            Picasso.get()
+                    .load(dog.getPhotoUrl())
+                    .resize(100, 100)
+                    .centerCrop()
+                    .into(target);
+        } else {
+            dogImageView.setImageResource(R.drawable.default_dog_image);
         }
 
+        dogNameTextView.setText(context.getString(R.string.dog_name, dog.getName()));
+        dogGenderTextView.setText(context.getString(R.string.dog_gender, dog.getGender()));
+        dogDescriptionTextView.setText(context.getString(R.string.dog_comments, dog.getComments()));
 
-        ImageView dogImageView = infoWindowView.findViewById(R.id.dog_image);
-        TextView dogNameTextView = infoWindowView.findViewById(R.id.dog_name);
-        TextView dogGenderTextView = infoWindowView.findViewById(R.id.dog_gender);
-        TextView dogDescriptionTextView = infoWindowView.findViewById(R.id.dog_description);
-
-        Picasso.get().load(dog.getPhotoUrl()).into(dogImageView);
-        dogNameTextView.setText(dog.getName());
-        dogGenderTextView.setText(dog.getGender());
-        dogDescriptionTextView.setText(dog.getDescription());
-
-        return infoWindowView;
+        return view;
     }
+
 }
 

@@ -16,6 +16,7 @@
         android:contentDescription="@string/dog_image" />
 
 
+
     <TextView
         android:id="@+id/dog_name"
         android:layout_width="wrap_content"

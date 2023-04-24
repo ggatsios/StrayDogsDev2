@@ -33,9 +33,9 @@ public class MainMenuActivity extends AppCompatActivity {
         btnFindDogs = findViewById(R.id.btnFindDogs);
         btnLogout = findViewById(R.id.btnLogout);
 
-        // Set the welcome message with the user's name
-//        String welcomeMessage = "Welcome, " + username + "!";
-//        txtWelcome.setText(welcomeMessage);
+//         Set the welcome message with the user's name
+        String welcomeMessage = "Welcome, " + username + "!";
+        txtWelcome.setText(welcomeMessage);
 
         // Set the click listeners for the buttons
         btnReportDog.setOnClickListener(new View.OnClickListener() {
