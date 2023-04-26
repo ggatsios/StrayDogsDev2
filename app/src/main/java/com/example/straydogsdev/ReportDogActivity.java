@@ -1,5 +1,6 @@
 package com.example.straydogsdev;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.common.api.Status;
@@ -33,6 +35,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
@@ -49,11 +52,16 @@ public class ReportDogActivity extends AppCompatActivity {
     private Button buttonUploadPhoto;
 
     private Uri selectedImageUri;
+    private String currentPhotoPath;
     private static final int AUTOCOMPLETE_REQUEST_CODE = 1;
     private LatLng locationLatLng;
     private ActivityResultLauncher<Intent> placeResultLauncher;
+    private ActivityResultLauncher<Uri> photoResultLauncher;
     double latitude;
     double longitude;
+    private static final int GALLERY_REQUEST_CODE = 100;
+    private static final int CAMERA_REQUEST_CODE = 101;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +116,12 @@ public class ReportDogActivity extends AppCompatActivity {
             }
         });
 
+        photoResultLauncher = registerForActivityResult(new ActivityResultContracts.TakePicture(), result -> {
+            if (result) {
+                selectedImageUri = Uri.fromFile(new File(currentPhotoPath));
+            }
+        });
+
         buttonReportDog.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -140,6 +154,7 @@ public class ReportDogActivity extends AppCompatActivity {
                     Toast.makeText(ReportDogActivity.this, "Please select a photo", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("dog_photos/" + UUID.randomUUID().toString());
                 UploadTask uploadTask = storageRef.putFile(selectedImageUri);
                 uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
@@ -174,14 +189,34 @@ public class ReportDogActivity extends AppCompatActivity {
             }
         });
 
+
+
         buttonUploadPhoto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                startActivityForResult(intent, 0);
+                AlertDialog.Builder builder = new AlertDialog.Builder(ReportDogActivity.this);
+                builder.setTitle("Choose an option")
+                        .setItems(new CharSequence[]{"Take photo", "Choose from gallery"}, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                switch (which) {
+                                    case 0:
+                                        dispatchTakePictureIntent();
+                                        break;
+                                    case 1:
+                                        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                                        startActivityForResult(intent, GALLERY_REQUEST_CODE);
+                                        break;
+                                }
+                            }
+                        })
+                        .setNegativeButton("Cancel", null)
+                        .show();
             }
         });
     }
+
+
 
     private void openAutocompleteActivity() {
         List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME, Place.Field.LAT_LNG, Place.Field.ADDRESS);
@@ -195,8 +230,11 @@ public class ReportDogActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
+        if (requestCode == GALLERY_REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             selectedImageUri = data.getData();
+        } else if (requestCode == CAMERA_REQUEST_CODE && resultCode == RESULT_OK) {
+            File photoFile = new File(currentPhotoPath);
+            selectedImageUri = Uri.fromFile(photoFile);
         }
 
         if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
@@ -215,5 +253,3 @@ public class ReportDogActivity extends AppCompatActivity {
         }
     }
 }
-
-
