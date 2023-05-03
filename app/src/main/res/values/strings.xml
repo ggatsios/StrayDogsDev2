@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">StrayDogsDev</string>
     <string name="dog_image">Dog Image</string>
+    <string name="dog_name">Name: %1$s</string>
+    <string name="dog_gender">Gender: %1$s</string>
+    <string name="dog_description">Description: %1$s</string>
 
 </resources>
