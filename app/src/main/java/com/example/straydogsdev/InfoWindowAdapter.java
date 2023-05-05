@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.straydogsdev.R;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.Marker;
 import com.squareup.picasso.Picasso;
@@ -28,6 +27,7 @@ public class InfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
         TextView dogNameTextView = view.findViewById(R.id.dog_name);
         TextView dogGenderTextView = view.findViewById(R.id.dog_gender);
         TextView dogDescriptionTextView = view.findViewById(R.id.dog_description);
+        TextView dogDateAddedTextView = view.findViewById(R.id.dog_date_added); // Add this line
 
         if (dog != null) {
             if (dog.getPhotoUrl() != null && !dog.getPhotoUrl().isEmpty()) {
@@ -43,6 +43,7 @@ public class InfoWindowAdapter implements GoogleMap.InfoWindowAdapter {
             dogNameTextView.setText(context.getString(R.string.dog_name, dog.getName()));
             dogGenderTextView.setText(context.getString(R.string.dog_gender, dog.getGender()));
             dogDescriptionTextView.setText(context.getString(R.string.dog_description, dog.getDescription()));
+            dogDateAddedTextView.setText(context.getString(R.string.dog_date_added, dog.getDateAdded())); // Add this line
         }
     }
 

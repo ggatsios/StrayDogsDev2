@@ -33,8 +33,11 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
 public class ReportDogActivity extends AppCompatActivity {
@@ -131,11 +134,6 @@ public class ReportDogActivity extends AppCompatActivity {
                     editTextDogColor.requestFocus();
                     return;
                 }
-                if (TextUtils.isEmpty(breed)) {
-                    editTextDogBreed.setError("Please enter the dog's breed");
-                    editTextDogBreed.requestFocus();
-                    return;
-                }
                 if (selectedImageUri == null) {
                     Toast.makeText(ReportDogActivity.this, "Please select a photo", Toast.LENGTH_SHORT).show();
                     return;
@@ -160,8 +158,9 @@ public class ReportDogActivity extends AppCompatActivity {
                             DatabaseReference databaseDogs = FirebaseDatabase.getInstance().getReference("dogs");
                             String id = databaseDogs.push().getKey();
                             if (id != null) {
-                                StrayDogData dog = new StrayDogData(id, name, location, color, breed, selectedGender, description, downloadUri.toString(), latitude, longitude);
-                                databaseDogs.child(id).setValue(dog);
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                                Date currentDate = new Date();
+                                StrayDogData dog = new StrayDogData(id, name, location, color, breed, selectedGender, description, downloadUri.toString(), latitude, longitude, currentDate);                                databaseDogs.child(id).setValue(dog);
                                 Toast.makeText(ReportDogActivity.this, "Dog reported successfully", Toast.LENGTH_LONG).show();
                                 finish();
                             } else {
@@ -194,23 +193,14 @@ public class ReportDogActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
-            selectedImageUri = data.getData();
-        }
-
-        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
-            if (resultCode == RESULT_OK) {
-                Place place = (Place) Autocomplete.getPlaceFromIntent(data);
-                editTextDogLocation.setText(place.getAddress());
-                locationLatLng = place.getLatLng();
-                if (locationLatLng != null) {
-                    latitude = locationLatLng.latitude;
-                    longitude = locationLatLng.longitude;
+        if (resultCode == RESULT_OK && requestCode == 0) {
+            if (data != null) {
+                selectedImageUri = data.getData();
+                if (selectedImageUri != null) {
+                    buttonUploadPhoto.setText("Photo Selected");
+                } else {
+                    Toast.makeText(this, "Error selecting photo", Toast.LENGTH_SHORT).show();
                 }
-            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
-                Status status = Autocomplete.getStatusFromIntent(data);
-                Toast.makeText(ReportDogActivity.this, "Error: " + status.getStatusMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

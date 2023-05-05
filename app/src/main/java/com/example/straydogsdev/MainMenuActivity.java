@@ -34,7 +34,7 @@ public class MainMenuActivity extends AppCompatActivity {
         btnLogout = findViewById(R.id.btnLogout);
 
 //         Set the welcome message with the user's name
-        String welcomeMessage = "Welcome, " + username + "!";
+        String welcomeMessage = "Welcome to StrayDog !";
         txtWelcome.setText(welcomeMessage);
 
         // Set the click listeners for the buttons

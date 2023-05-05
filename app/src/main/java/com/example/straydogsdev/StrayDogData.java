@@ -1,5 +1,7 @@
 package com.example.straydogsdev;
 
+import java.util.Date;
+
 public class StrayDogData {
     private String id;
     private String name;
@@ -11,9 +13,10 @@ public class StrayDogData {
     public String photoUrl;
     private double latitude;
     private double longitude;
+    private Date dateAdded;
 
 
-    public StrayDogData(String id, String name, String location, String color, String breed, String selectedGender, String description, String photoUrl, double latitude, double longitude) {
+    public StrayDogData(String id, String name, String location, String color, String breed, String selectedGender, String description, String photoUrl, double latitude, double longitude, Date dateAdded) {
         this.id = id;
         this.name = name;
         this.location = location;
@@ -24,6 +27,7 @@ public class StrayDogData {
         this.photoUrl = photoUrl;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.dateAdded = dateAdded;
     }
 
     public StrayDogData() {
@@ -67,6 +71,8 @@ public class StrayDogData {
     public double getLongitude() {
         return longitude;
     }
+    public Date getDateAdded() {return dateAdded;}
+
 
     public void setId(String id) {
         this.id = id;
@@ -105,6 +111,7 @@ public class StrayDogData {
     public void setLongitude(double longitude) {
         this.longitude = longitude;
     }
+    public void setDateAdded(Date dateAdded) {this.dateAdded = dateAdded;}
 
 
     @Override

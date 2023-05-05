@@ -21,7 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText mUserName;
+    private EditText mUsername;
     private EditText mEmail;
     private EditText mPassword;
     private EditText mConfirmPassword;
@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
 
-        mUserName = findViewById(R.id.etUsername);
+        mUsername = findViewById(R.id.etUsername);
         mEmail = findViewById(R.id.etEmail);
         mPassword = findViewById(R.id.etPassword);
         mConfirmPassword = findViewById(R.id.etRePassword);
@@ -49,7 +49,7 @@ public class RegisterActivity extends AppCompatActivity {
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String username = mUserName.getText().toString().trim();
+                String username = mUsername.getText().toString().trim();
                 String email = mEmail.getText().toString().trim();
                 String password = mPassword.getText().toString().trim();
                 String confirmPassword = mConfirmPassword.getText().toString().trim();

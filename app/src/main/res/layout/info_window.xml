@@ -40,5 +40,12 @@
         android:textSize="14sp"
         android:textColor="@android:color/black" />
 
+    <TextView
+        android:id="@+id/dog_date_added"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textColor="@android:color/black" />
+
 
 </LinearLayout>
