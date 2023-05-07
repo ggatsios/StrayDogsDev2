@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Initialize the Places SDK with your API key
         if (!Places.isInitialized()) {
-            Places.initialize(getApplicationContext(), "AIzaSyDRPxOLxc2QXmjTeBlXx1AWCHigLZdC4Fo");
+            Places.initialize(getApplicationContext(), "AIzaSyAfWM0G7G9jY3q18yAdvUOqCmjIBCTZLxA");
         }
 
         if (ContextCompat.checkSelfPermission(this,
