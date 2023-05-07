@@ -20,7 +20,7 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
 
-        String apiKey = "AIzaSyAfWM0G7G9jY3q18yAdvUOqCmjIBCTZLxA";
+        String apiKey = "AIzaSyCWMYdlULQUXLukj5ubeIBFXurTzQtY_Oo";
         if(!Places.isInitialized()){
             Places.initialize(getApplicationContext(), apiKey);
         }
